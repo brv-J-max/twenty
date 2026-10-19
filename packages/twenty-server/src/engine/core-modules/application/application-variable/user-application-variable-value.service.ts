@@ -220,7 +220,7 @@ export class UserApplicationVariableValueService {
         key,
       });
 
-    // A stored empty value would hide the default forever
+    // No row means the default applies again
     if (!isNonEmptyString(plainTextValue)) {
       await this.userApplicationVariableValueRepository.delete(workspaceId, {
         applicationVariableId: flatApplicationVariable.id,
