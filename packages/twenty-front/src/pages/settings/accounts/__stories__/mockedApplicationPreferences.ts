@@ -1,5 +1,6 @@
 import { isNonEmptyString } from '@sniptt/guards';
 import { HttpResponse, graphql } from 'msw';
+import { getWorker } from 'msw-storybook-addon';
 import { fn } from 'storybook/test';
 
 import {
@@ -151,19 +152,24 @@ const buildApplicationPreferences = () => [
   },
 ];
 
-export const MY_APPLICATION_PREFERENCES_LOAD_ERROR_HANDLER = graphql.query(
-  'MyApplicationPreferences',
-  () =>
-    HttpResponse.json({
-      errors: [
-        {
-          message: 'Internal server error',
-          extensions: { code: 'INTERNAL_SERVER_ERROR' },
-        },
-      ],
-    }),
-  { once: true },
-);
+// A fresh once-handler per story: the preview keeps module state across stories
+export const failNextApplicationPreferencesRequest = () => {
+  getWorker().use(
+    graphql.query(
+      'MyApplicationPreferences',
+      () =>
+        HttpResponse.json({
+          errors: [
+            {
+              message: 'Internal server error',
+              extensions: { code: 'INTERNAL_SERVER_ERROR' },
+            },
+          ],
+        }),
+      { once: true },
+    ),
+  );
+};
 
 export const APPLICATION_PREFERENCES_GRAPHQL_HANDLERS = [
   graphql.query('MyApplicationPreferences', () => {
