@@ -421,7 +421,9 @@ export const AppPreferencesListLoadErrorOffersRetry: Story = {
         { timeout: 3000 },
       ),
     ).toBeVisible();
-    expect(canvas.getByRole('link', { name: 'Gmail' })).toBeVisible();
+    expect(
+      canvas.getByRole('link', { name: 'Gmail and Calendar' }),
+    ).toBeVisible();
     expect(canvas.queryByText('Fathom')).not.toBeInTheDocument();
 
     await userEvent.click(canvas.getByRole('button', { name: 'Retry' }));
@@ -476,7 +478,7 @@ export const InstalledAppsKeepBlocklistWhenNoNativeAppIsEnabled: Story = {
     ).toBeVisible();
     expect(await canvas.findByText('Blocklist')).toBeVisible();
     expect(
-      canvas.queryByRole('link', { name: 'Gmail' }),
+      canvas.queryByRole('link', { name: 'Gmail and Calendar' }),
     ).not.toBeInTheDocument();
   },
 };
