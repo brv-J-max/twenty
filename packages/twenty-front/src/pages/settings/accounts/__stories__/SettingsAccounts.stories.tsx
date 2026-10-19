@@ -28,7 +28,7 @@ import {
 } from '~/pages/settings/accounts/__stories__/mockedAccountGroups';
 import {
   APPLICATION_PREFERENCES_GRAPHQL_HANDLERS,
-  failNextApplicationPreferencesRequest,
+  MY_APPLICATION_PREFERENCES_LOAD_ERROR_HANDLER,
   seedApplicationPreferencesStory,
 } from '~/pages/settings/accounts/__stories__/mockedApplicationPreferences';
 
@@ -404,12 +404,14 @@ export const AppPreferencesListFlagsMissingConfiguration: Story = {
 
 export const AppPreferencesListLoadErrorOffersRetry: Story = {
   ...accountGroupsStory,
-  beforeEach: async () => {
-    await seedApplicationPreferencesStory();
-    failNextApplicationPreferencesRequest();
-  },
+  beforeEach: seedApplicationPreferencesStory,
   parameters: {
-    msw: { handlers: APPLICATION_PREFERENCES_GRAPHQL_HANDLERS },
+    msw: {
+      handlers: [
+        MY_APPLICATION_PREFERENCES_LOAD_ERROR_HANDLER,
+        ...APPLICATION_PREFERENCES_GRAPHQL_HANDLERS,
+      ],
+    },
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

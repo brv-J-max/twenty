@@ -17,7 +17,7 @@ import {
 import {
   APPLICATION_PREFERENCES_GRAPHQL_HANDLERS,
   GRANOLA_USER_SETTINGS_FRONT_COMPONENT_ID,
-  failNextApplicationPreferencesRequest,
+  MY_APPLICATION_PREFERENCES_LOAD_ERROR_HANDLER,
   findApplicationsGatedQuery,
   findOneFrontComponent,
   seedApplicationPreferencesStory,
@@ -252,9 +252,13 @@ export const UnknownAppGoesBackToAccounts: Story = {
 };
 
 export const LoadErrorOffersRetryInsteadOfGoingBack: Story = {
-  beforeEach: async () => {
-    await seedApplicationPreferencesStory();
-    failNextApplicationPreferencesRequest();
+  parameters: {
+    msw: {
+      handlers: [
+        MY_APPLICATION_PREFERENCES_LOAD_ERROR_HANDLER,
+        ...APPLICATION_PREFERENCES_GRAPHQL_HANDLERS,
+      ],
+    },
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
