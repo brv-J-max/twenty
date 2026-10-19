@@ -13,6 +13,7 @@ describe('parseGaxiosError', () => {
     'ECONNABORTED',
     'ETIMEDOUT',
     'ERR_NETWORK',
+    'EAI_AGAIN',
   ])('maps the %s socket failure to a temporary error', (code) => {
     const exception = parseGaxiosError(gaxiosErrorWithCode(code));
 

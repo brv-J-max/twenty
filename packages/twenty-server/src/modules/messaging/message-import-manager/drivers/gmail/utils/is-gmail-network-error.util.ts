@@ -18,6 +18,7 @@ export const isGmailNetworkError = (error: unknown): error is GaxiosError => {
     case MessageNetworkExceptionCode.ETIMEDOUT:
     case MessageNetworkExceptionCode.ERR_NETWORK:
     case MessageNetworkExceptionCode.EHOSTUNREACH:
+    case MessageNetworkExceptionCode.EAI_AGAIN:
       return true;
     default:
       return false;

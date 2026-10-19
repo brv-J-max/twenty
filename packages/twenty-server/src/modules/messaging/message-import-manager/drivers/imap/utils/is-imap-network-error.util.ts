@@ -25,6 +25,7 @@ const NODEJS_NETWORK_ERROR_CODES = [
   MessageNetworkExceptionCode.ETIMEDOUT,
   MessageNetworkExceptionCode.ERR_NETWORK,
   MessageNetworkExceptionCode.EHOSTUNREACH,
+  MessageNetworkExceptionCode.EAI_AGAIN,
 ];
 
 export const isImapNetworkError = (error: Error): boolean => {

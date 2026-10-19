@@ -20,6 +20,7 @@ export const parseGaxiosError = (
     case MessageNetworkExceptionCode.ECONNABORTED:
     case MessageNetworkExceptionCode.ETIMEDOUT:
     case MessageNetworkExceptionCode.ERR_NETWORK:
+    case MessageNetworkExceptionCode.EAI_AGAIN:
       return new CalendarEventImportDriverException(
         error.message,
         CalendarEventImportDriverExceptionCode.TEMPORARY_ERROR,

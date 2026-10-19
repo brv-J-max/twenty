@@ -6,4 +6,5 @@ export enum MessageNetworkExceptionCode {
   ETIMEDOUT = 'ETIMEDOUT',
   ERR_NETWORK = 'ERR_NETWORK',
   EHOSTUNREACH = 'EHOSTUNREACH',
+  EAI_AGAIN = 'EAI_AGAIN',
 }
